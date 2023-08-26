@@ -12,3 +12,23 @@ int sum (vector<int> v){
     }
     return sum;
 }
+
+/** 
+ * @param node スタート地点
+ * @param sum 
+ * @param maxSum 最大値
+ * @param graph グラフ
+ * @param visited 既に訪問済み
+ */
+void dfs(int node, int sum, int &maxSum, vector<vector<int>> &graph, vector<bool> &visited) {
+    visited[node] = true;
+    
+    for (int i = 1; i < graph.size(); ++i) {
+        if (graph[node][i] != -1 && !visited[i]) {
+        dfs(i, sum + graph[node][i], maxSum, graph, visited);
+        }
+    }
+    
+    maxSum = max(maxSum, sum);
+    visited[node] = false;
+}
