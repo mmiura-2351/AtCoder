@@ -1,5 +1,12 @@
 #include <bits/stdc++.h>
 using namespace std;
+using ll=long long;
+using str=string;
+#define rep(i, n) for (int i = 0; (i) < (n); ++(i))
+#define all(a) (a).begin(), (a).end()
+#define input(a) cin >> (a)
+#define print(p) cout << (p)
+#define println(p) cout << (p) << endl
 
 bool contains(const string& haystack, const string& needle) {
     return haystack.find(needle) != string::npos;
