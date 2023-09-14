@@ -19,6 +19,20 @@ int solve(int n, string s){
       is_dango = false;
     }
   }
+  for (int i = n; i == 0; i--){
+    if (s[i] == 'o' && is_dango == true) {
+      pre += 1;
+    } else if(s[i] == 'o' && is_dango == false){
+      is_dango = true;
+      pre = 1;
+    } else if(s[i] == '-' && is_dango == false){
+      max = max > pre ? max : pre;
+      pre = 0;
+      is_dango = true;
+    } else if(s[i] == '-' && is_dango == true){
+      is_dango = false;
+    }
+  }
   return max != 0 ? max : -1;
 }
 
