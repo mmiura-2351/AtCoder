@@ -1,44 +1,41 @@
 #include <bits/stdc++.h>
 using namespace std;
+using ll=long long;
+using str=string;
+#define rep(i, n) for (int i = 0; (i) < (n); ++(i))
+#define all(a) (a).begin(), (a).end()
+#define rall(a) (a).rbegin(), (a).rend()
+#define inputarr(arr, size) do {for (size_t i = 0; i < size; ++i) { cin >> arr[i]; }} while (0)
+#define printarr(arr, size) do {for (size_t i = 0; i < size; ++i) { cout << arr[i]; if (i != size - 1) cout << " ";} cout << endl;} while (0)
 
-int solve(int n, string s){
-  int max = -1;
-  int pre = 0;
-  bool is_dango = false;
-  for (int i = 0; i < n; i++){
-    if (s[i] == 'o' && is_dango == true) {
-      pre += 1;
-    } else if(s[i] == 'o' && is_dango == false){
-      is_dango = true;
-      pre = 1;
-    } else if(s[i] == '-' && is_dango == false){
-      max = max > pre ? max : pre;
-      pre = 0;
-      is_dango = true;
-    } else if(s[i] == '-' && is_dango == true){
-      is_dango = false;
-    }
-  }
-  for (int i = n; i == 0; i--){
-    if (s[i] == 'o' && is_dango == true) {
-      pre += 1;
-    } else if(s[i] == 'o' && is_dango == false){
-      is_dango = true;
-      pre = 1;
-    } else if(s[i] == '-' && is_dango == false){
-      max = max > pre ? max : pre;
-      pre = 0;
-      is_dango = true;
-    } else if(s[i] == '-' && is_dango == true){
-      is_dango = false;
-    }
-  }
-  return max != 0 ? max : -1;
+template <typename... Args>
+void input(Args&... args) {
+  ((cin >> args), ...);
+}
+
+template <typename... Args>
+void print(Args... args) {
+  ((cout << args << " "), ...);
+}
+
+template <typename... Args>
+void println(Args... args) {
+  print(args...);
+  cout << endl;
 }
 
 int main(){
-  int n; cin >> n;
-  string s; cin >> s;
-  int ans = solve(n,s);
-  cout << ans << endl;
+  int n, res = -1, length = 0;
+  str s;
+  input(n, s);
+  rep(i, n) {
+    if (s[i] == 'o') {
+      length++;
+      res = max(res, length);
+    } else {
+      length = 0;
+    }
+  }
+  if (res == n) res = -1;
+  print(res);
 }
