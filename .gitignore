@@ -7,3 +7,8 @@ Paiza
 
 # user additional
 program
+
+# for tests
+actual_output.txt
+input.txt
+output.txt
