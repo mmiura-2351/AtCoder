@@ -7,10 +7,10 @@ using ll = long long;
 using P = pair<int,int>;
 
 int main() {
-  int n;
-  cin >> n;
+  int a, b;
+  cin >> a >> b;
 
-  int ans = 0;
+  int ans = a + b;
 
   cout << ans << endl;
   return 0;
