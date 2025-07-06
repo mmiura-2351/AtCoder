@@ -176,6 +176,12 @@ contests/**/output
 contests/**/debug
 contests/**/.debug
 
+# コンテストの一時ファイル
+contests/**/*.in
+contests/**/*.out
+contests/**/*.acc.json
+contests/**/Makefile
+
 # ==================================================
 # ツール固有キャッシュ
 # ==================================================
