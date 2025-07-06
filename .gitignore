@@ -168,8 +168,8 @@ coverage/
 # Note: 提出履歴は通常ホームディレクトリ（~/.ac-env/submissions/）に保存される
 
 # 競技プログラミング固有
-# コンテストディレクトリは個人的な作業ファイルのため除外
-contests/
+# コンテストリポジトリのためコミット
+# contests/
 
 # 競技プログラミング固有の一時ファイル
 contests/**/output
@@ -201,8 +201,8 @@ yarn.lock
 !Makefile
 !README.md
 
-# テンプレートディレクトリは個人的な作業ファイルのため除外
-templates/
+# コンテストリポジトリのためコミット
+# templates/
 
 # スクリプトファイルは含める
 !scripts/
