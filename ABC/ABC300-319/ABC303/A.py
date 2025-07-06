@@ -1,6 +1,0 @@
-n = int(input())
-s = input()
-t = input()
-s = s.replace("l", "1").replace("o", "0")
-t = t.replace("l", "1").replace("o", "0")
-print("Yes" if s == t else "No")
