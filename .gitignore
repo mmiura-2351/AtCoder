@@ -154,8 +154,9 @@ bin/
 # プロジェクト固有
 # ==================================================
 # 個人設定（ユーザー固有の設定は除外）
-config.json
-config.local.json
+# コンテストリポジトリのためコンフィグはコミット
+# config.json
+# config.local.json
 .env.local
 .env
 
@@ -180,7 +181,8 @@ contests/**/.debug
 contests/**/*.in
 contests/**/*.out
 contests/**/*.acc.json
-contests/**/Makefile
+Makefile
+!/Makefile
 
 # ==================================================
 # ツール固有キャッシュ
@@ -204,7 +206,7 @@ yarn.lock
 # 除外しないファイル（明示的に含める）
 # ==================================================
 # 重要な設定ファイルは除外しない
-!Makefile
+!/Makefile
 !README.md
 
 # コンテストリポジトリのためコミット
