@@ -3,24 +3,43 @@ input = sys.stdin.readline
 
 def main():
     def domino(n, s):
-        min_dominos = [s[0]]
-        sorted_dominos = sorted(s)
-        for i in range(n):
-            if sorted_dominos[i] <= min_dominos[0]:
-                continue
-            elif i == n-1:
-                if min_dominos[-1]*2 >= sorted_dominos[i]:
-                    return len(min_dominos) + 1
-                else:
+        first_domino_size = s[0]
+        last_domino_size = s[n-1]
+
+        if first_domino_size * 2 >= last_domino_size:
+            return 2
+
+        candidates = []
+        for i in range(1, n-1):
+            candidates.append(s[i])
+
+        candidates.sort()
+
+        current_reach = first_domino_size
+        domino_count = 1
+
+        for size in candidates:
+            if current_reach * 2 >= last_domino_size:
+                break
+
+            if current_reach * 2 >= size:
+                next_reach = size
+                for candidate in candidates:
+                    if current_reach * 2 >= candidate and candidate > next_reach:
+                        next_reach = candidate
+
+                if next_reach == current_reach:
                     return -1
+
+                current_reach = next_reach
+                domino_count += 1
             else:
-                if min_dominos[-1]*2 >= sorted_dominos[i]:
-                    if min_dominos[-1]*2 >= sorted_dominos[i+1]:
-                        continue
-                    else:
-                        min_dominos.append(sorted_dominos[i])
-                else:
-                    return -1
+                return -1
+
+        if current_reach * 2 >= last_domino_size:
+            return domino_count + 1
+        else:
+            return -1
 
     t = int(input())
     for _ in range(t):
