@@ -9,6 +9,32 @@ GREEN='\033[0;32m'
 BLUE='\033[0;34m'
 NC='\033[0m'
 
+# typical90用の問題名変換関数
+convert_typical90_problem_name() {
+    local num="$1"
+    local result=""
+    
+    # 先頭の0を削除
+    num=$((10#$num))
+    
+    # 数字を文字に変換（1-26: a-z, 27-52: aa-az, 53-78: ba-bz, 79-90: ca-cl）
+    if [ $num -le 26 ]; then
+        # 1-26: a-z
+        result=$(printf "\\$(printf %03o $((96 + num)))")
+    elif [ $num -le 52 ]; then
+        # 27-52: aa-az
+        result="a$(printf "\\$(printf %03o $((96 + num - 26)))")"
+    elif [ $num -le 78 ]; then
+        # 53-78: ba-bz
+        result="b$(printf "\\$(printf %03o $((96 + num - 52)))")"
+    elif [ $num -le 90 ]; then
+        # 79-90: ca-cl
+        result="c$(printf "\\$(printf %03o $((96 + num - 78)))")"
+    fi
+    
+    echo "$result"
+}
+
 # 引数チェック
 if [ $# -eq 0 ]; then
     echo -e "${RED}エラー: コンテスト名が必要です${NC}"
@@ -42,7 +68,13 @@ if [ -d "$CONTEST" ]; then
             cd "$problem"
             
             # テストケースをダウンロード（明示的にtestディレクトリを指定）
-            url="https://atcoder.jp/contests/$CONTEST/tasks/${CONTEST}_${problem_name}"
+            if [ "$CONTEST" = "typical90" ]; then
+                # typical90の場合は問題名を変換
+                converted_name=$(convert_typical90_problem_name "$problem_name")
+                url="https://atcoder.jp/contests/$CONTEST/tasks/${CONTEST}_${converted_name}"
+            else
+                url="https://atcoder.jp/contests/$CONTEST/tasks/${CONTEST}_${problem_name}"
+            fi
             if oj download "$url" -d test 2>/dev/null; then
                 echo -e "${GREEN}✓ 問題 $problem_name のテストケースをダウンロードしました${NC}"
             else
